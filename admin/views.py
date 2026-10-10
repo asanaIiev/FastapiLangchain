@@ -7,5 +7,5 @@ class UserAdmin(ModelView, model=UserProfile):
 class UserRefreshAdmin(ModelView, model=UserRefresh):
     column_list = []
 
-    for i in UserProfile.__mapper__.columns:
+    for i in UserRefresh.__mapper__.columns:
         column_list.append(i.key)

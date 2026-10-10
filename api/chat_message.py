@@ -23,7 +23,8 @@ async def get_list(
     )
     return stmt.scalars().all()
 
-llm = ChatOllama(model="llama3.2")
+llm = ChatOllama(model="llama3.2",
+                 temperature=1, top_k=3, top_p=0.8, num_predict=1000)
 
 @router.post("/", response_model=ChatMessageResponseScheme)
 async def chat(
@@ -49,12 +50,7 @@ async def chat(
             )
     try:
         messages = [
-            SystemMessage(
-                content=(
-                    "Ты 10-летний Python backend и JavaScript frontend разработчик. "
-                    "Отвечай на все вопросы от пользователя как подобает твоему уровню."
-                )
-            ),
+            SystemMessage(content=''),
             HumanMessage(content=scheme.message)
         ]
 
